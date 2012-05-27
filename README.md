@@ -1,29 +1,54 @@
-# Gb
+gb: gist browser
+===================
 
-TODO: Write a gem description
+gb is a gist browers within a terminal for the lazy
+who don't want to leave terminal just to remember snippets,
+installation notes, command line options etc.
 
-## Installation
+Setup
+------------
 
-Add this line to your application's Gemfile:
+### Installation
 
-    gem 'gb'
+```bash
+gem install gb
+```
+### Configuration
 
-And then execute:
+Set directory gb uses.
 
-    $ bundle
+```bash
+gb config --path=/home/t4ku/gb/
+```
 
-Or install it yourself as:
+Usage
+-----
 
-    $ gem install gb
+### list all my gists
 
-## Usage
+```bash
+gb list
+```
+### edit gist
 
-TODO: Write usage instructions here
+```bash
+gb edit <gist ID>
+```
 
-## Contributing
+TODO
+----
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Added some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+### Senario
+
+* list all gists I posted, select the file, edit it, and commit the
+  change.
+* Instantly create a gist.
+* filter gists by title, language, gist type(filetype maybe).
+
+Reference
+---------
+
+### Gist API
+
+[Gists API](http://developer.github.com/v3/gists/)
+
