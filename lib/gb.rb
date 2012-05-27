@@ -10,8 +10,10 @@ module Gb
 
       commands = {
         'list' => OptionParser.new do |opts|
-
           
+        end,
+        'config' => OptionParser.new do |opts|
+
         end
       }
 
