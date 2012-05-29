@@ -5,31 +5,34 @@ gb is a gist browers within a terminal for the lazy
 who don't want to leave terminal just to remember snippets,
 installation notes, command line options etc.
 
+** It's under develpment, and most of description below are not yet
+implemented **
+
 Setup
 ------------
 
 ### Installation
 
-```bash
-gem install gb
-```
+
 ### Configuration
 
 Set directory gb uses.
 
 ```bash
-gb config --path=/home/t4ku/gb/
+bundle exec gb init --username=abc --password=def
 ```
+
+This creates ~/.gb_profile
 
 Usage
 -----
 
-### list all my gists
+### list all my gists(TBD)
 
 ```bash
 gb list
 ```
-### edit gist
+### edit gist(TBD)
 
 ```bash
 gb edit <gist ID>
