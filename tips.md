@@ -54,4 +54,4 @@ browser in
 terminal","note_url":null,"created_at":"2012-05-27T06:02:51Z","id":380294}
 ```
 
-
+ unset SSH_ASKPASS
