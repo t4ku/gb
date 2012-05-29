@@ -8,7 +8,10 @@ Feature: Use local directory to cache github id ,credential and clone gist repos
     Then It creates authorization token via github api
     Then The authorization token should be saved to local dir
 
+  @local_profile
   Scenario: Use authtoken in local profile
     Given I have local profile with authentiocation token
     When I run "gb list"
-    Then I should see my gists
+    Then It should read profile
+    And It should fetch gists using authentication token in profile
+    And I should see my gists

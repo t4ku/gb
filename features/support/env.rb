@@ -11,4 +11,17 @@ After do
   FakeFS.deactivate!
 end
 
+Before('@local_profile') do
+  profile = <<-EOS
+Gb::Configure do |config|
+  
+  # Token to access gist. created by gb init.
+  #
+  config.token = "zxcvbnmasdfghqwert"
+  config.token_id = "12345678"
+end
+EOS
+
+end
+
 require 'cucumber/rspec/doubles'
