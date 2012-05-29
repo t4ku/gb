@@ -5,8 +5,8 @@ gb is a gist browers within a terminal for the lazy
 who don't want to leave terminal just to remember snippets,
 installation notes, command line options etc.
 
-** It's under develpment, and most of description below are not yet
-implemented **
+**It's under develpment, and most of description below are not yet
+implemented**
 
 Setup
 ------------

@@ -18,18 +18,6 @@ describe Gb do
     token
   end
 
-  context "init" do
-    it "should setup profile" do
-      Gb::Token.should_receive(:create).and_return(stub_token)
-
-      Gb.run("init","--username","gist-browser-test","--password","gbtest1")
-      File.exists?("~/.gb_profile").should == true
-
-      profile = File.read("~/.gb_profile")
-      profile.should include("config.token_id = \"12345\"")
-    end
-  end
-
   context "list" do
     it "should abord if no profile found" do
 

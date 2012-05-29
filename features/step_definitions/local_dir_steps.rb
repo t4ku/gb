@@ -1,17 +1,35 @@
 
 Given /^I don't have any config in local dir$/ do
-    #pending # express the regexp above with the code you wish you had
+    File.exists?("~/.gb_profile").should be_false
 end
 
-When /^I run "(.*?)"$/ do |arg1|
-    pending # express the regexp above with the code you wish you had
+When /^I run "gb init --username=(.*?) --password=(.*?)"$/ do |opt1,opt2|
+    stub_token = Gb::Token.new
+    stub_token.token_id = 12345
+
+    Gb::Token.stub!(:create).and_return(stub_token)
+    Gb.run("init","--username","gist-browser-test","--password","gbtest1")
 end
 
-Then /^I am asked to enter username and password$/ do
-    pending # express the regexp above with the code you wish you had
+Then /^It creates authorization token via github api$/ do
+    
 end
 
 Then /^The authorization token should be saved to local dir$/ do
-    pending # express the regexp above with the code you wish you had
+    File.exists?("~/.gb_profile").should == true
+    profile = File.read("~/.gb_profile")
+    profile.should include("config.token_id = \"12345\"")
+end
+
+Given /^I have local profile with authentiocation token$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+When /^I run "gb list"$/ do 
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I should see my gists$/ do
+  pending # express the regexp above with the code you wish you had
 end
 
