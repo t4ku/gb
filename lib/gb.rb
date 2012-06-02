@@ -4,31 +4,29 @@ require "optparse"
 require "gb/user"
 require "gb/token"
 require "gb/local"
+require "gb/gist"
 
 module Gb
   class <<self
     def run(*args)
 
-      subcmd = "help"
+      subcmd = args.shift
       options = {}
 
       commands = {
         'init' => OptionParser.new do |opts|
-          subcmd = :init
           opts.on("--username VAL") { |v| options[:username] = v }
           opts.on("--password VAL") { |v| options[:password] = v }
         end,
         'list' => OptionParser.new do |opts|
-          prepare_env
-        end,
-        'config' => OptionParser.new do |opts|
-          prepare_env
         end
       }
-      commands[args.shift].order!(args)
-
+    
+      commands[subcmd].order!(args)
+    
       case subcmd
-        when :init
+        when "init"
+          puts "creating token..."
           token = Token.create(options[:username],options[:password])
           create_profile(token)
       end

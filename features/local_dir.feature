@@ -12,6 +12,4 @@ Feature: Use local directory to cache github id ,credential and clone gist repos
   Scenario: Use authtoken in local profile
     Given I have local profile with authentiocation token
     When I run "gb list"
-    Then It should read profile
-    And It should fetch gists using authentication token in profile
-    And I should see my gists
+    Then It should fetch gists using authentication token in profile

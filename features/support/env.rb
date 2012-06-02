@@ -22,6 +22,9 @@ Gb::Configure do |config|
 end
 EOS
 
+	File.open('~/.gb_profile','w') do |file|
+		file.puts profile
+	end
 end
 
 require 'cucumber/rspec/doubles'
