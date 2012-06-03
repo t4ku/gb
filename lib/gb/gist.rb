@@ -30,7 +30,7 @@ module Gb
       end
     end
 
-    attr_reader :html_url,:public,:files,:user,
+    attr_accessor :html_url,:public,:files,:user,
                 :description,:created_at,:url,:updated_at,
                 :git_pull_url,:comments,:git_push_url,:gist_id
 
@@ -52,6 +52,10 @@ module Gb
       @git_push_url = res["git_push_url"]
 
       self
+    end
+
+    def output
+      "#{gist_id} #{description}"
     end
   end
 end

@@ -5,6 +5,7 @@ require "gb/user"
 require "gb/token"
 require "gb/config"
 require "gb/gist"
+require "gb/printer"
 
 module Gb
   GIST_BASE_URL='https://api.github.com'
@@ -32,7 +33,9 @@ module Gb
           create_profile(token)
         when "list"
           config = load_profile
-          Gist.list(config.access_token)
+          gists = Gist.list(config.access_token)
+          printer = Gb::Printer.get
+          printer.dump(gists)
       end
 
     end
