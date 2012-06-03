@@ -13,12 +13,12 @@ end
 
 Before('@local_profile') do
   profile = <<-EOS
-Gb::Configure do |config|
+Gb::configure do |config|
   
   # Token to access gist. created by gb init.
   #
-  config.token = "zxcvbnmasdfghqwert"
-  config.token_id = "12345678"
+  config.access_token.token = "zxcvbnmasdfghqwert"
+  config.access_token.token_id = "12345678"
 end
 EOS
 

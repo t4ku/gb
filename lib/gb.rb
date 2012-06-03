@@ -3,7 +3,7 @@ require "optparse"
 
 require "gb/user"
 require "gb/token"
-require "gb/local"
+require "gb/config"
 require "gb/gist"
 
 module Gb
@@ -30,26 +30,40 @@ module Gb
           puts "creating token..."
           token = Token.create(options[:username],options[:password])
           create_profile(token)
+        when "list"
+          config = load_profile
+          Gist.list(config.access_token)
       end
 
     end
 
-    def prepare_env
-
+    def configure
+      config = Config.new
+      yield config
+      config
     end
+
+    private
 
     def create_profile(token)
       template = <<-EOS
-Gb::Configure do |config|
+Gb::configure do |config|
   
   # Token to access gist. created by gb init.
   #
-  config.token = "#{token.token}"
-  config.token_id = "#{token.token_id}"
+  config.access_token.token = "#{token.token}"
+  config.access_token.token_id = "#{token.token_id}"
 end
       EOS
       File.open(File.expand_path('~/.gb_profile'),"w") do |file|
         file.puts template
+      end
+    end
+
+    def load_profile
+      ret = nil
+      File.open(File.expand_path('~/.gb_profile')) do |file|
+        ret = instance_eval(file.read)
       end
     end
   end

@@ -18,7 +18,7 @@ end
 Then /^The authorization token should be saved to local dir$/ do
   File.exists?("~/.gb_profile").should == true
   profile = File.read("~/.gb_profile")
-  profile.should include("config.token_id = \"12345\"")
+  profile.should include("config.access_token.token_id = \"12345\"")
 end
 
 Given /^I have local profile with authentiocation token$/ do
@@ -29,17 +29,12 @@ When /^I run "gb list"$/ do
 end
 
 Then /^It should fetch gists using authentication token in profile$/ do
-  Gb::Gist.should_receive(:fetch).with do |args|
+  Gb::Gist.should_receive(:list).with do |*args|
     # see env.rb
-    config = args.pop
-    config.token.should ==  "zxcvbnmasdfghqwert"
-    config.token_id.should = "12345678"
+    access_token = args.pop
+    access_token.token.should ==  "zxcvbnmasdfghqwert"
+    access_token.token_id.should == "12345678"
   end
 
   @lists = Gb.run("list")
 end
-
-Then /^I should see my gists$/ do
-  @lists.size.should > 0
-end
-
