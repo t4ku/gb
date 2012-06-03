@@ -7,6 +7,7 @@ require "gb/local"
 require "gb/gist"
 
 module Gb
+  GIST_BASE_URL='https://api.github.com'
   class <<self
     def run(*args)
 

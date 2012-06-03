@@ -1,5 +1,4 @@
 module Gb
-  GIST_BASE_URL='https://api.github.com'
   class Token
     def self.create(login,pass)
       @auth = { :username => login,:password  => pass  }
@@ -38,6 +37,10 @@ module Gb
       @token_id = res["id"]
 
       return self
+    end
+
+    def to_param_with_key
+      "access_token=#{@token}"
     end
   end
 end

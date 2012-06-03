@@ -40,6 +40,6 @@ Then /^It should fetch gists using authentication token in profile$/ do
 end
 
 Then /^I should see my gists$/ do
-  pending # express the regexp above with the code you wish you had
+  @lists.size.should > 0
 end
 
