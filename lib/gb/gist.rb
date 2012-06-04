@@ -50,6 +50,7 @@ module Gb
       @git_pull_url = res["git_pull_url"]
       @comments     = res["comments"]
       @git_push_url = res["git_push_url"]
+      @gist_id      = res["id"]
 
       self
     end

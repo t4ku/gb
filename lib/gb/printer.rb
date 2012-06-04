@@ -10,6 +10,9 @@ module Gb
 
     def dump(target)
       if target.respond_to? :each
+        target.each do |item|
+          @output.puts item.output
+        end
       else
         @output.puts target.output
       end
