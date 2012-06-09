@@ -9,6 +9,8 @@ module Gb
     end
 
     def dump(target)
+      return unless target
+
       if target.respond_to? :each
         target.each do |item|
           @output.puts item.output

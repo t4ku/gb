@@ -27,4 +27,26 @@ EOS
 	end
 end
 
+module FixtureProvider
+  class <<self
+    def sample_gist_responses
+
+      gist = Gb::Gist.new
+      gist.html_url   = "https://gist.github.com/2862339"
+      gist.public     = true
+
+      gist.description  = "test entry"
+      gist.created_at   = "2012-06-03T07:00:47Z"
+      gist.url          = "https://api.github.com/gists/2862339"
+      gist.updated_at   = "2012-06-03T07:03:07Z"
+      gist.git_pull_url = "git://gist.github.com/2862339.git"
+      gist.comments     = 0
+      gist.git_push_url = "git@gist.github.com:2862339.git"
+      gist.gist_id             = "2862339"
+
+      gist
+    end
+  end
+end
+
 require 'cucumber/rspec/doubles'
