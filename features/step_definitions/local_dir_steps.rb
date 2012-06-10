@@ -28,7 +28,7 @@ end
 Then /^It should fetch gists using authentication token in profile$/ do
   Gb::Gist.should_receive(:list).with do |*args|
     # see env.rb
-    access_token = args.pop
+    access_token = args.shift
     access_token.token.should ==  "zxcvbnmasdfghqwert"
     access_token.token_id.should == "12345678"
   end
@@ -38,9 +38,20 @@ end
 
 
 Given /^I have cached response in local dir$/ do
-  pending
+  FileUtils.mkdir("~/.gb")
+  FileUtils.mkdir("~/.gb/.cache")
+  File.open("~/.gb/.cache/gists.20120610211294.json",'w') do |file|
+    file.print FixtureProvider.sample_gists_json
+  end
 end
 
 Then /^It should fetch gist from local cache$/ do
-  pending
+  stub_io = StringIO.new
+  printer = Gb::Printer.get
+  printer.io = stub_io
+
+  @lists = Gb.run("list")
+
+  stub_io.seek(0)
+  stub_io.read.should include "test entry local"
 end

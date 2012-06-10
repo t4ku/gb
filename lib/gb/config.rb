@@ -4,9 +4,12 @@ module Gb
 
     end
 
-    attr_accessor :cache_path
+    attr_accessor :local_path
     def access_token
       @token ||= Token.new
+    end
+    def cache_path
+      "#{local_path}/.cache"
     end
   end
 end

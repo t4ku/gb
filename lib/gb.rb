@@ -35,15 +35,25 @@ module Gb
           create_profile(token)
         when "list"
           config = load_profile
-          gists = Gist.list(config.access_token)
-          printer = Gb::Printer.get
-          printer.dump(gists,Gb::Template::GistList)
+          if config && config.local_path
+            FileUtils.mkdir(config.local_path) unless File.exist?(config.local_path)
+            FileUtils.mkdir(config.cache_path) unless File.exist?(config.cache_path)
+
+            gists = Gist.list(config.access_token,:cache_path => config.cache_path)
+            printer = Gb::Printer.get
+            printer.dump(gists,Gb::Template::GistList)
+          else
+            raise "Invalid Profile"
+          end
       end
 
     end
 
+    def config
+      @config ||= Config.new
+    end
+
     def configure
-      config = Config.new
       yield config
       config
     end
@@ -53,6 +63,7 @@ module Gb
     def create_profile(token)
       template = <<-EOS
 Gb::configure do |config|
+  config.local_path = "~/.gb"
   
   # Token to access gist. created by gb init.
   #

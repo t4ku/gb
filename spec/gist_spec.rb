@@ -76,12 +76,11 @@ module Gb
 
     end
 
-    # it "should test" do
-    #   token = Token.new
-    #   token.token = "504b081786d695a54d499cd2edacf6349694086f"
-    #   res =  Gist.list(token)
-    #   p res.parsed_response
-    # end
+     it "should test" do
+       token = Token.new
+       token.token = "504b081786d695a54d499cd2edacf6349694086f"
+       res =  Gist.list(token)
+     end
 
   end
 end

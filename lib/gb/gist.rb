@@ -1,15 +1,51 @@
 module Gb
   class Gist
+    class RequestError < Exception;end
+
+    # dirty stub for
+    # HTTParty::Response Class
+    #
+
+    class LocalResponse
+      def code
+        200
+      end
+
+      def initialize(body)
+        @json = body
+      end
+
+      def parsed_response
+        MultiJson.load(@json)
+      end
+    end
+
     # Class Methods
     # 
 
-    class <<self
-      def list(token=nil)
+    class << self
+      def list(token=nil,opts={})
+        resp = get_local(token,opts)
+        unless resp
+          resp = get_remote(token,opts)
+        end
+        handle_response(resp)
+      end
+
+      def get_remote(token=nil,opts={})
         opts = {
           :format => :json
         }
         resp = HTTParty.get("#{GIST_BASE_URL}/gists?#{token.to_param_with_key if token}",opts)
-        handle_response(resp)
+      end
+
+      def get_local(token=nil,opts={})
+        return unless opts[:cache_path]
+
+        path = File.expand_path(opts[:cache_path])
+        hit =  Dir.glob("#{path}/gists.*.json").first
+        json_cache = File.read(hit)
+        return LocalResponse.new(json_cache)
       end
 
       def handle_response(response)
@@ -28,6 +64,7 @@ module Gb
 
         gists
       end
+
     end
 
     attr_accessor :html_url,:public,:files,:user,
