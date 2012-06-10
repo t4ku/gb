@@ -44,7 +44,7 @@ module FixtureProvider
       gist.git_push_url = "git@gist.github.com:2862339.git"
       gist.gist_id             = "2862339"
 
-      gist
+      [gist]
     end
   end
 end

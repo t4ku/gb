@@ -10,6 +10,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency('json')
   gem.add_dependency('httparty')
+  
   gem.add_development_dependency('cucumber')
   gem.add_development_dependency('fakefs')
   gem.add_development_dependency('rspec')

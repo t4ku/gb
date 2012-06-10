@@ -1,10 +1,12 @@
 require "gb/version"
 require "optparse"
+require "erb"
 
 require "gb/user"
 require "gb/token"
 require "gb/config"
 require "gb/gist"
+require "gb/template"
 require "gb/printer"
 
 module Gb
@@ -35,7 +37,7 @@ module Gb
           config = load_profile
           gists = Gist.list(config.access_token)
           printer = Gb::Printer.get
-          printer.dump(gists)
+          printer.dump(gists,Gb::Template::GistList)
       end
 
     end

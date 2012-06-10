@@ -11,7 +11,7 @@ module Gb
         gist.gist_id = 1234567
         gist.description = "test title"
 
-        printer.dump(gist)
+        printer.dump([gist],Gb::Template::GistList)
 
         output.seek(0)
         output.read.should == "1234567 test title\n"
