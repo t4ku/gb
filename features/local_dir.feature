@@ -13,3 +13,9 @@ Feature: Use local directory to cache github id ,credential and clone gist repos
     Given I have local profile with authentiocation token
     When I run "gb list"
     Then It should fetch gists using authentication token in profile
+
+  @local_profile
+  Scenario: Use cached response in local dir
+    Given I have cached response in local dir 
+    When I run "gb list"
+    Then It should fetch gist from local cache

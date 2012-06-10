@@ -4,6 +4,7 @@ module Gb
 
     end
 
+    attr_accessor :cache_path
     def access_token
       @token ||= Token.new
     end

@@ -14,6 +14,7 @@ end
 Before('@local_profile') do
   profile = <<-EOS
 Gb::configure do |config|
+  config.cache_path = "~/.gb"
   
   # Token to access gist. created by gb init.
   #

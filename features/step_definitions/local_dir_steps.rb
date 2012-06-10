@@ -1,7 +1,4 @@
-
-Given /^I don't have any config in local dir$/ do
-  File.exists?("~/.gb_profile").should be_false
-end
+Given /^I don't have any config in local dir$/ do File.exists?("~/.gb_profile").should be_false end
 
 When /^I run "gb init --username=(.*?) --password=(.*?)"$/ do |opt1,opt2|
   stub_token = Gb::Token.new
@@ -37,4 +34,13 @@ Then /^It should fetch gists using authentication token in profile$/ do
   end
 
   @lists = Gb.run("list")
+end
+
+
+Given /^I have cached response in local dir$/ do
+  pending
+end
+
+Then /^It should fetch gist from local cache$/ do
+  pending
 end
