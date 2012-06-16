@@ -36,8 +36,9 @@ module Gb
         when "list"
           config = load_profile
           if config && config.local_path
-            FileUtils.mkdir(config.local_path) unless File.exist?(config.local_path)
-            FileUtils.mkdir(config.cache_path) unless File.exist?(config.cache_path)
+            # TODO: remove redunduncy
+            FileUtils.mkdir(File.expand_path(config.local_path)) unless File.exist?(File.expand_path(config.local_path))
+            FileUtils.mkdir(File.expand_path(config.cache_path)) unless File.exist?(File.expand_path(config.cache_path))
 
             gists = Gist.list(config.access_token,:cache_path => config.cache_path)
             printer = Gb::Printer.get

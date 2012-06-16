@@ -44,8 +44,12 @@ module Gb
 
         path = File.expand_path(opts[:cache_path])
         hit =  Dir.glob("#{path}/gists.*.json").first
-        json_cache = File.read(hit)
-        return LocalResponse.new(json_cache)
+        if hit
+          json_cache = File.read(hit)
+          return LocalResponse.new(json_cache)
+        else
+          nil
+        end
       end
 
       def handle_response(response)
