@@ -2,8 +2,7 @@ module Gb
   class Gist
     class RequestError < Exception;end
 
-    # dirty stub for
-    # HTTParty::Response Class
+    # Stubbing.. HTTParty::Response Class
     #
 
     class LocalResponse
@@ -33,10 +32,18 @@ module Gb
       end
 
       def get_remote(token=nil,opts={})
-        opts = {
+        req_opts = {
           :format => :json
         }
-        resp = HTTParty.get("#{GIST_BASE_URL}/gists?#{token.to_param_with_key if token}",opts)
+        resp = HTTParty.get("#{GIST_BASE_URL}/gists?#{token.to_param_with_key if token}",req_opts)
+
+        if opts.has_key? :cache_path  && resp.code == 200
+          path = "#{File.expand_path(opts[:cache_path])}/gists.#{Time.now.strftime("%Y%m%d%H%M%S")}.json"
+          File.open path,"w" do |file|
+            file.print resp.body
+          end
+        end
+        resp
       end
 
       def get_local(token=nil,opts={})
