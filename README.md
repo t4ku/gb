@@ -11,7 +11,8 @@ Setup
 ### Installation
 
 ```bash
-gem install gb
+git clone https://github.com/t4ku/gb.git
+bundle install
 ```
 
 ### Configuration
@@ -22,7 +23,7 @@ bundle exec gb init --username=abc --password=def
 
 This creates ~/.gb_profile and store auth token there.
 
-Usage
+Usage(for now, you need to prefix command with 'bundle exec')
 -----
 
 ### list all my gists
