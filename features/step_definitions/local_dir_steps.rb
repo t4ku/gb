@@ -55,3 +55,31 @@ Then /^It should fetch gist from local cache$/ do
   stub_io.seek(0)
   stub_io.read.should include "test entry local"
 end
+
+Given /^I don't have local gist repository$/ do
+  # nothing to do since @local_profile only creates empty dir
+  #
+end
+
+When /^I run "gb clone 1234567"$/ do
+  @stub_io = StringIO.new
+  printer = Gb::Printer.get
+  printer.io = @stub_io
+
+  stub_gist = Gb::Gist.new
+  stub_gist.git_push_url = "git@github.com:1234567.git"
+
+  Gb::Gist.stub!(:list).and_return([stub_gist])
+  Gb.stub(:system).and_return(true)
+  Gb.run("clone","1234567")
+
+end
+
+Then /^It should clone gists repository into local dir$/ do
+  #Dir.exists?("~/.gb/1234567").should be_true
+end
+
+Then /^It should show local path of the repository$/ do
+  @stub_io.seek(0)
+  @stub_io.read.should include "successfully cloned gist to "
+end

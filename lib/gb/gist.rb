@@ -37,7 +37,8 @@ module Gb
         }
         resp = HTTParty.get("#{GIST_BASE_URL}/gists?#{token.to_param_with_key if token}",req_opts)
 
-        if opts.has_key? :cache_path  && resp.code == 200
+        if opts.has_key?(:cache_path)  &  resp.code == 200
+          puts "creating file"
           path = "#{File.expand_path(opts[:cache_path])}/gists.#{Time.now.strftime("%Y%m%d%H%M%S")}.json"
           File.open path,"w" do |file|
             file.print resp.body

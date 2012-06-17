@@ -16,6 +16,7 @@ module Gb
 
       subcmd = args.shift
       options = {}
+      subargs = {}
 
       commands = {
         'init' => OptionParser.new do |opts|
@@ -23,6 +24,9 @@ module Gb
           opts.on("--password VAL") { |v| options[:password] = v }
         end,
         'list' => OptionParser.new do |opts|
+        end,
+        'clone' => OptionParser.new do |opts|
+          opts.on("VAL") { |v| subargs[:clone_id] = v }
         end
       }
     
@@ -45,6 +49,23 @@ module Gb
             printer.dump(gists,Gb::Template::GistList)
           else
             raise "Invalid Profile"
+          end
+        when "clone"
+          unless subargs.has_key?(:clone_id) && subargs[:clone_id].size > 6
+            raise "invalid gist id"
+          end
+
+          config = load_profile
+          if config && config.local_path
+            printer = Gb::Printer.get
+            gists = Gist.list(config.access_token,:cache_path => config.cache_path)
+
+            gist = gists.select { |elm| elm.gist_id = subargs[:clone_id] }.first
+            if system("cd #{config.local_path};git clone #{gist.git_push_url}")
+              printer.io.puts "successfully cloned gist to #{config.local_path}/#{gist.gist_id}"
+            else
+              printer.io.puts "error:#{$?}"
+            end
           end
       end
 

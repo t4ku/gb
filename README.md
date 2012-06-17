@@ -20,7 +20,7 @@ gem install gb
 bundle exec gb init --username=abc --password=def
 ```
 
-It creates ~/.gb_profile and store auth token there.
+This creates ~/.gb_profile and store auth token there.
 
 Usage
 -----
@@ -31,17 +31,22 @@ Usage
 gb list
 ```
 
-TODO
-----
+### clone gist
 
-* [=] caches response in local dir for later reuse
-  * [=] optionaly, fetch from api(sync dir)
-* commands
-  * fetch(sync)
-    * gist
-    * all my gists
-  * edit
-    * pass local gist path, launch editor
+```bash
+gb clone <gist id>
+```
+
+### navigate to local gist repo(TODO)
+
+```bash
+gb go <gist id>
+```
+### search local gist files(TODO)
+
+```bash
+gb search <content>
+```
 
 Reference
 ---------
