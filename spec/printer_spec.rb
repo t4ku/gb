@@ -2,7 +2,6 @@ require "spec_helper"
 
 module Gb
   describe Printer do
-    context "List Gists" do
       it "should show title" do
         output = StringIO.new
         printer = Printer.new(output)
@@ -14,8 +13,21 @@ module Gb
         printer.dump([gist],Gb::Template::GistList)
 
         output.seek(0)
-        output.read.should == "1234567 test title\n"
+        output.read.should include  " test title\n"
       end
-    end
+
+      it "should no description when description is empty" do
+        output = StringIO.new
+        printer = Printer.new(output)
+
+        gist = Gist.new
+        gist.gist_id = 1234567
+        gist.description = ""
+
+        printer.dump([gist],Gb::Template::GistList)
+
+        output.seek(0)
+        output.read.should include "(no description)\n"
+      end
   end
 end

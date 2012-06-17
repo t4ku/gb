@@ -13,7 +13,7 @@ EOS
       def normal(items)
         template =<<-'EOS'
 <%- items.each do |item| -%>
-<%= "#{item.gist_id} #{item.description}"%>
+<%= "#{item.gist_id.to_s.ljust(20)} #{(item.description && item.description.size > 0) ? item.description : '(no description)'}"%>
 <%- end -%>
 EOS
         ERB.new(template,nil,'-').result(binding)
